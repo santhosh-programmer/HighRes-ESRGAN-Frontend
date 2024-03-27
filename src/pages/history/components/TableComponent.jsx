@@ -25,6 +25,8 @@ const TableComponent = () => {
       try {
         const temp = await response.json()
         setImageDetails(temp);
+
+
         const responses = await Promise.all(temp.map(item => fetch(item.low_res.replace('http://', 'https://'), {
           headers: {
             'ngrok-skip-browser-warning' : "true",
@@ -33,13 +35,15 @@ const TableComponent = () => {
         const blobs = await Promise.all(responses.map(response => response.blob()));
         setImageUrls(blobs.map(blob => URL.createObjectURL(blob)));
 
+
+
         const finalResponses = await Promise.all(temp.map(item => fetch(item.low_res.replace('http://', 'https://'), {
           headers: {
             'ngrok-skip-browser-warning' : "true",
           }
         })));
-        const finalBlobs = await Promise.all(responses.map(response => response.blob()));
-        setImageUrlsFinal(blobs.map(blob => URL.createObjectURL(blob)));
+        const finalBlobs = await Promise.all(finalResponses.map(response => response.blob()));
+        setImageUrlsFinal(finalBlobs.map(blob => URL.createObjectURL(blob)));
 
       } catch (error) {
         console.error('Error fetching images:', error);
