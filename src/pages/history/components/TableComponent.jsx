@@ -29,7 +29,7 @@ const TableComponent = () => {
         setImageDetails(temp);
 
 
-        const responses = await Promise.all(temp.map(item => fetch(item.low_res, {
+        const responses = await Promise.all(temp.map(item => fetch(item.low_res.replace('http://', 'https://'), {
           headers: {
             'ngrok-skip-browser-warning' : "true",
           }
