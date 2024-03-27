@@ -43,22 +43,22 @@ const TableComponent = () => {
     });
   }, []);
 
-  const handleDownload = (url, filename) => {
-    fetch(url.replace('http://', 'https://'))
-      .then(response => response.blob())
-      .then(blob => {
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement('a');
-        link.href = url.replace('http://', 'https://');
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-      })
-      .catch(error => {
-        showToastMessage(`Failed to download ${filename}: ${error.message}`);
-      });
-  };
+  // const handleDownload = (url, filename) => {
+  //   fetch(url.replace('http://', 'https://'))
+  //     .then(response => response.blob())
+  //     .then(blob => {
+  //       const url = window.URL.createObjectURL(new Blob([blob]));
+  //       const link = document.createElement('a');
+  //       link.href = url.replace('http://', 'https://');
+  //       link.setAttribute('download', filename);
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       link.parentNode.removeChild(link);
+  //     })
+  //     .catch(error => {
+  //       showToastMessage(`Failed to download ${filename}: ${error.message}`);
+  //     });
+  // };
 
   return (
     <div className="center-container">
@@ -90,7 +90,7 @@ const TableComponent = () => {
                     <td>
                     {item.status ? (
                         <div>
-                            <a onClick={() => handleDownload(item.high_res, `image_${index}.png`)} className='download-btn'>
+                            <a href={imageUrls[index]} download className='download-btn'>
                                 Download
                             </a>
                             <span>/</span>
