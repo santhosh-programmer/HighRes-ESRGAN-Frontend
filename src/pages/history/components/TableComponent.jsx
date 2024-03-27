@@ -13,7 +13,7 @@ const TableComponent = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch('https://hugely-hopeful-sturgeon.ngrok-free.app/api/photo', {
+    fetch('https://tops-gecko-enjoyed.ngrok-free.app/api/photo', {
       method: 'GET',
       headers: {
         'ngrok-skip-browser-warning' : "true"

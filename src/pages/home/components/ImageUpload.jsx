@@ -21,9 +21,9 @@ function ImageUpload() {
     const img = new Image();
     img.src = URL.createObjectURL(file);
     img.onload = () => {
-      if (img.width > 200 || img.height > 200) {
-        showToastMessage("Image dimensions must not exceed 200x200 pixels.")
-        setError("Image dimesions must not exceed 200x200 pixels.")
+      if (img.width > 150 || img.height > 150) {
+        showToastMessage("Image dimensions must not exceed 150x150 pixels.")
+        setError("Image dimesions must not exceed 150x150 pixels.")
       } else {
         setError('');
       }
@@ -36,7 +36,7 @@ function ImageUpload() {
         setLoading(true)
         const formData = new FormData();
         formData.append('low_res', selectedImage);
-        fetch('https://hugely-hopeful-sturgeon.ngrok-free.app/api/photo/', {
+        fetch('https://tops-gecko-enjoyed.ngrok-free.app/api/photo/', {
         method: 'POST',
         headers: {
           'ngrok-skip-browser-warning' : "true"
