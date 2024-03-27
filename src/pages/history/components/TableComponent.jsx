@@ -15,6 +15,9 @@ const TableComponent = () => {
 
     fetch('https://hugely-hopeful-sturgeon.ngrok-free.app/api/photo', {
       method: 'GET',
+      headers: {
+        'ngrok-skip-browser-warning' : "true"
+      }
     })
     .then(async response => {
       setLoading(false);

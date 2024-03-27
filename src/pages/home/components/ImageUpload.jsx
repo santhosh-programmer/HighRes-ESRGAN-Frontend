@@ -38,6 +38,9 @@ function ImageUpload() {
         formData.append('low_res', selectedImage);
         fetch('https://hugely-hopeful-sturgeon.ngrok-free.app/api/photo/', {
         method: 'POST',
+        headers: {
+          'ngrok-skip-browser-warning' : "true"
+        },
         body: formData
       })
       .then(response => {
