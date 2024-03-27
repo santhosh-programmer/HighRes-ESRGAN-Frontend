@@ -13,7 +13,7 @@ const TableComponent = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch('http://hugely-hopeful-sturgeon.ngrok-free.app/api/photo', {
+    fetch('https://hugely-hopeful-sturgeon.ngrok-free.app/api/photo', {
       method: 'GET',
     })
     .then(async response => {
