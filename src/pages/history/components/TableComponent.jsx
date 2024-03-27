@@ -14,36 +14,27 @@ const TableComponent = () => {
 
   useEffect(() => {
     setLoading(true);
-
     fetch('https://tops-gecko-enjoyed.ngrok-free.app/api/photo', {
       method: 'GET',
       headers: {
         'ngrok-skip-browser-warning' : "true",
       }
     })
-    .then(async response => {
-
-      
+    .then(async response => { 
       try {
         const temp = await response.json()
         setImageDetails(temp);
-
-
         const responses = await Promise.all(temp.map(item => fetch(item.low_res.replace('http://', 'https://'), {
           headers: {
             'ngrok-skip-browser-warning' : "true",
           }
         })));
         const blobs = await Promise.all(responses.map(response => response.blob()));
-
         setImageUrls(blobs.map(blob => URL.createObjectURL(blob)));
         console.log(imageUrls)
       } catch (error) {
         console.error('Error fetching images:', error);
       }
-
-
-
       setLoading(false);
     })
     .catch(error => {
@@ -53,12 +44,12 @@ const TableComponent = () => {
   }, []);
 
   const handleDownload = (url, filename) => {
-    fetch(url)
+    fetch(url.replace('http://', 'https://'))
       .then(response => response.blob())
       .then(blob => {
         const url = window.URL.createObjectURL(new Blob([blob]));
         const link = document.createElement('a');
-        link.href = url;
+        link.href = url.replace('http://', 'https://');
         link.setAttribute('download', filename);
         document.body.appendChild(link);
         link.click();
