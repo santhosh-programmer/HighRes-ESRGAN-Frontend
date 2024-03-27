@@ -6,6 +6,7 @@ const TableComponent = () => {
   const [loading, setLoading] = useState(false);
   const [imageDetails, setImageDetails] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [imageUrlsFinal, setImageUrlsFinal] = useState([]);
   const images=[]
 
   const showToastMessage = (message) => {
@@ -31,7 +32,15 @@ const TableComponent = () => {
         })));
         const blobs = await Promise.all(responses.map(response => response.blob()));
         setImageUrls(blobs.map(blob => URL.createObjectURL(blob)));
-        console.log(imageUrls)
+
+        const finalResponses = await Promise.all(temp.map(item => fetch(item.low_res.replace('http://', 'https://'), {
+          headers: {
+            'ngrok-skip-browser-warning' : "true",
+          }
+        })));
+        const finalBlobs = await Promise.all(responses.map(response => response.blob()));
+        setImageUrlsFinal(blobs.map(blob => URL.createObjectURL(blob)));
+
       } catch (error) {
         console.error('Error fetching images:', error);
       }
@@ -90,7 +99,7 @@ const TableComponent = () => {
                     <td>
                     {item.status ? (
                         <div>
-                            <a href={imageUrls[index]} download className='download-btn'>
+                            <a href={imageUrlsFinal[index]} download className='download-btn'>
                                 Download
                             </a>
                             <span>/</span>
