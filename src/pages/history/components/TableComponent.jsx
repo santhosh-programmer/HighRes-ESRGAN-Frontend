@@ -27,7 +27,9 @@ const TableComponent = () => {
       try {
         setImageDetails(await response.json());
 
-        const responses = await Promise.all(imageDetails.map(item => fetch(item.low_res, {
+        temp = await response.json()
+
+        const responses = await Promise.all(temp.map(item => fetch(item.low_res, {
           headers: {
             'ngrok-skip-browser-warning' : "true",
           }
