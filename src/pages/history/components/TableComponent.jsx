@@ -97,7 +97,10 @@ const TableComponent = () => {
                 {imageDetails.map((item, index) => (
                 <tr key={index}>
                     <td>
-                    <img src={imageUrls[index]} alt="Low res" />
+                    <img src={imageUrls[index]} alt="Low res" /> <br/>
+                    <a href={item.low_res} className='view-btn'>
+                      View
+                    </a>
                     </td>
                     <td style={{
                         color : item.status ? "green" : "black"
@@ -107,7 +110,7 @@ const TableComponent = () => {
                     <td>
                     {item.status ? (
                         <div>
-                            <a onClick={() => handleDownload(item.high_res, `image_${index}.png`)} download className='download-btn'>
+                            <a onClick={() => handleDownload(item.high_res, `highres.png`)} download className='download-btn'>
                                 Download
                             </a>
                             <span>/</span>

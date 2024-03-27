@@ -6,9 +6,10 @@ const TechStack = () => {
     <div id='tech-stack-div'>
       <h1>Made with</h1>
       <div>
+        <img src="pytorch.png" alt="Pytorch" />
+        <img src="opencv.png" alt="OpenCV" />
         <img src="react.png" alt="React" />
         <img src="django.png" alt="Django" />
-        <img src="aws.png" alt="Aws" />
       </div>
       <div style={{
             width: "40%",
