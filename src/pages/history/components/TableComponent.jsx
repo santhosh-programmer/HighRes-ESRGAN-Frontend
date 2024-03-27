@@ -5,6 +5,8 @@ import "../styles/TableStyle.css"
 const TableComponent = () => {
   const [loading, setLoading] = useState(false);
   const [imageDetails, setImageDetails] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
+  const images=[]
 
   const showToastMessage = (message) => {
     toast.error(message, {});
@@ -16,12 +18,31 @@ const TableComponent = () => {
     fetch('https://tops-gecko-enjoyed.ngrok-free.app/api/photo', {
       method: 'GET',
       headers: {
-        'ngrok-skip-browser-warning' : "true"
+        'ngrok-skip-browser-warning' : "true",
       }
     })
     .then(async response => {
+
+      
+      try {
+        setImageDetails(await response.json());
+
+        const responses = await Promise.all(imageDetails.map(item => fetch(item.low_res, {
+          headers: {
+            'ngrok-skip-browser-warning' : "true",
+          }
+        })));
+        const blobs = await Promise.all(responses.map(response => response.blob()));
+
+        setImageUrls(blobs.map(blob => URL.createObjectURL(blob)));
+        console.log(imageUrls)
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+
+
+
       setLoading(false);
-      setImageDetails(await response.json());
     })
     .catch(error => {
       setLoading(false);
@@ -66,7 +87,7 @@ const TableComponent = () => {
                 {imageDetails.map((item, index) => (
                 <tr key={index}>
                     <td>
-                    <img src={item.low_res} alt="Low res" />
+                    <img src={imageUrls[index]} alt="Low res" />
                     </td>
                     <td style={{
                         color : item.status ? "green" : "black"
