@@ -37,7 +37,7 @@ const TableComponent = () => {
 
 
 
-        const finalResponses = await Promise.all(temp.map(item => fetch(item.low_res.replace('http://', 'https://'), {
+        const finalResponses = await Promise.all(temp.map(item => fetch(item.high_res.replace('http://', 'https://'), {
           headers: {
             'ngrok-skip-browser-warning' : "true",
           }
@@ -56,22 +56,26 @@ const TableComponent = () => {
     });
   }, []);
 
-  // const handleDownload = (url, filename) => {
-  //   fetch(url.replace('http://', 'https://'))
-  //     .then(response => response.blob())
-  //     .then(blob => {
-  //       const url = window.URL.createObjectURL(new Blob([blob]));
-  //       const link = document.createElement('a');
-  //       link.href = url.replace('http://', 'https://');
-  //       link.setAttribute('download', filename);
-  //       document.body.appendChild(link);
-  //       link.click();
-  //       link.parentNode.removeChild(link);
-  //     })
-  //     .catch(error => {
-  //       showToastMessage(`Failed to download ${filename}: ${error.message}`);
-  //     });
-  // };
+  const handleDownload = (url, filename) => {
+    fetch(url.replace('http://', 'https://'), {
+      headers: {
+        'ngrok-skip-browser-warning' : "true",
+      }
+    })
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url.replace('http://', 'https://');
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+      .catch(error => {
+        showToastMessage(`Failed to download ${filename}: ${error.message}`);
+      });
+  };
 
   return (
     <div className="center-container">
@@ -103,7 +107,7 @@ const TableComponent = () => {
                     <td>
                     {item.status ? (
                         <div>
-                            <a href={imageUrlsFinal[index]} download className='download-btn'>
+                            <a onClick={() => handleDownload(item.high_res, `image_${index}.png`)} download className='download-btn'>
                                 Download
                             </a>
                             <span>/</span>
