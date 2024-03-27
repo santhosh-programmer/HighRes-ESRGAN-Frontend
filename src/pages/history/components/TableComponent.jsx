@@ -27,7 +27,7 @@ const TableComponent = () => {
       try {
         setImageDetails(await response.json());
 
-        temp = await response.json()
+        const temp = await response.json()
 
         const responses = await Promise.all(temp.map(item => fetch(item.low_res, {
           headers: {
