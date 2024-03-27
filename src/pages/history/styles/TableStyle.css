@@ -1,0 +1,74 @@
+.center-container {
+    margin: 40px 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+    font-weight: bold;
+}
+
+th {
+    background: linear-gradient(#0080bf, #00acdf);
+    color: white; /* Dark text color */
+    font-size: 16px; /* Font size */
+    padding: 10px; /* Padding around content */
+    text-align: center; /* Align text to the left */
+    border-bottom: 2px solid #ddd; /* Bottom border */
+    
+}
+
+/* Style the table body */
+td {
+      padding: 10px; /* Padding around content */
+      border-bottom: 1px solid #00abdf38; /* Bottom border */
+}
+    
+  /* Style the image */
+ table img {
+    max-width: 100px; 
+    max-height: 100px;
+  }
+
+.download-btn {
+    color: blue;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.view-btn {
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  table {
+      border-collapse: collapse;
+      width: 80%;
+      text-align: center;
+      font-weight: bold;
+  }
+
+  th {
+      background: linear-gradient(#0080bf, #00acdf);
+      color: white; /* Dark text color */
+      font-size: 14px; /* Font size */
+      padding: 10px; /* Padding around content */
+      text-align: center; /* Align text to the left */
+      border-bottom: 2px solid #ddd; /* Bottom border */
+      
+  }
+
+  /* Style the table body */
+  td {
+    font-size: 14px;
+        padding: 10px; /* Padding around content */
+        border-bottom: 1px solid #00abdf38; /* Bottom border */
+  }
+
+}

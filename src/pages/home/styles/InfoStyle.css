@@ -1,0 +1,19 @@
+.info-div  {
+    width: 75%;
+    margin: 50px auto;
+}
+
+.info-div h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    font-family: 'Poppins';
+}
+
+@media screen and (max-width: 768px) {
+    .info-div {
+        width: 80%;
+    }
+    .info-div h1 {
+        font-size: 2rem;
+    }
+}
