@@ -3,11 +3,11 @@
     src: url("../../../../public/customFont.ttf");
   }
 
-#tech-stack-div, #research-div{
+#tech-stack-div, #ref-div{
     margin-top: 100px;
 }
 
-#tech-stack-div h1 , #research-div h1{
+#tech-stack-div h1, #ref-div h1{
     margin-bottom: 40px;
     font-family: "batman";
     font-size: 3rem;
@@ -31,13 +31,19 @@
 }
 
 
-#research-div a {
-    margin: 1rem;
+#ref-div li {
+    margin: 10px 10vw;
     font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#ref-div a {
+    margin-left: 10px;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {
-    #tech-stack-div h1, #research-div h1{
+    #tech-stack-div h1, #ref-div h1{
         font-size: 2rem;
         font-weight: 500;
     }
@@ -45,5 +51,7 @@
         height: 75px;
         margin: 1rem;
     }
-    
+    #ref-div li {
+        font-size: 1.1rem;
+    }
 }

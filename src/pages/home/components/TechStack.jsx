@@ -1,5 +1,6 @@
 import React from 'react'
 import "../styles/TechStyle.css"
+import CustomDivider from './CustomDivider'
 
 const TechStack = () => {
   return (
@@ -11,13 +12,7 @@ const TechStack = () => {
         <img src="react.png" alt="React" />
         <img src="django.png" alt="Django" />
       </div>
-      <div style={{
-            width: "40%",
-            height: "4px",
-            backgroundColor:"black",
-            margin: "100px 0 40px 12%"
-        }}>
-        </div>
+      <CustomDivider/>
     </div>
   )
 }

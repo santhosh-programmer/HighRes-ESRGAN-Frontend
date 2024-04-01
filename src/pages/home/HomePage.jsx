@@ -5,6 +5,7 @@ import ImageUpload from './components/ImageUpload'
 import InfoComponent from './components/InfoComponent'
 import TechStack from './components/TechStack'
 import Footer from './components/Footer'
+import Reference from './components/Reference'
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
         <SliderComponent/>
         <ImageUpload/>
         <InfoComponent/>
+        <Reference/>
         <TechStack/>
         <Footer/>
     </>
