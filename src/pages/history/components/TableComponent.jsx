@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import "../styles/TableStyle.css"
+import { Link } from 'react-router-dom';
 
 const TableComponent = () => {
   const [loading, setLoading] = useState(false);
   const [imageDetails, setImageDetails] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
-  const [imageUrlsFinal, setImageUrlsFinal] = useState([]);
-  const images=[]
+  const [lowResImages, setLowResImages] = useState([]);
 
   const showToastMessage = (message) => {
     toast.error(message, {});
@@ -26,24 +25,13 @@ const TableComponent = () => {
         const temp = await response.json()
         setImageDetails(temp);
 
-
         const responses = await Promise.all(temp.map(item => fetch(item.low_res.replace('http://', 'https://'), {
           headers: {
             'ngrok-skip-browser-warning' : "true",
           }
         })));
         const blobs = await Promise.all(responses.map(response => response.blob()));
-        setImageUrls(blobs.map(blob => URL.createObjectURL(blob)));
-
-
-
-        const finalResponses = await Promise.all(temp.map(item => fetch(item.high_res.replace('http://', 'https://'), {
-          headers: {
-            'ngrok-skip-browser-warning' : "true",
-          }
-        })));
-        const finalBlobs = await Promise.all(finalResponses.map(response => response.blob()));
-        setImageUrlsFinal(finalBlobs.map(blob => URL.createObjectURL(blob)));
+        setLowResImages(blobs.map(blob => URL.createObjectURL(blob)));
 
       } catch (error) {
         console.error('Error fetching images:', error);
@@ -80,10 +68,10 @@ const TableComponent = () => {
   return (
     <div className="center-container">
       {
-        loading ? (
-            <h1>Loading...</h1>
+        !loading ? (
+            <h1 style={{marginTop: "30vh"}}>Loading...</h1>
         ) : imageDetails.length === 0 ? (
-            <h1>No Data Found</h1>
+            <h1 style={{marginTop: "30vh"}}>No Data Found</h1>
         ) : (
             <table>
             <thead>
@@ -97,10 +85,10 @@ const TableComponent = () => {
                 {imageDetails.map((item, index) => (
                 <tr key={index}>
                     <td>
-                    <img src={imageUrls[index]} alt="Low res" /> <br/>
-                    <a href={item.low_res} className='view-btn'>
+                    <img src={lowResImages[index]} alt="Low res" /> <br/>
+                    <Link to={"/view-image" + item.low_res.split('/media')[1]} className='view-btn'>
                       View
-                    </a>
+                    </Link>
                     </td>
                     <td style={{
                         color : item.status ? "green" : "black"
@@ -114,9 +102,9 @@ const TableComponent = () => {
                                 Download
                             </a>
                             <span>/</span>
-                            <a href={item.high_res} className='view-btn'>
+                            <Link to={"/view-image" + item.high_res.split('/media')[1]} className='view-btn'>
                                 View
-                            </a>
+                            </Link>
                         </div>
                     ) : (
                         <h3>Not Available</h3>

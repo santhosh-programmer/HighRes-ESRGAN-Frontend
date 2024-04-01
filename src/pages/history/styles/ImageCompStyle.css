@@ -1,0 +1,12 @@
+#img-comp-div {
+    min-height: 100vh;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white
+}
+
+#img-comp-div img {
+    margin: 2rem;
+}
