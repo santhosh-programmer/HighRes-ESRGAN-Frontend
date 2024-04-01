@@ -9,4 +9,6 @@
 
 #img-comp-div img {
     margin: 2rem;
+    max-width: 100vw;
+    max-height: 100vh;
 }
