@@ -68,7 +68,7 @@ const TableComponent = () => {
   return (
     <div className="center-container">
       {
-        !loading ? (
+        loading ? (
             <h1 style={{marginTop: "30vh"}}>Loading...</h1>
         ) : imageDetails.length === 0 ? (
             <h1 style={{marginTop: "30vh"}}>No Data Found</h1>
